@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import oracledb from 'oracledb';
+import {connection} from '../../lib/connectionString'
 
 const prisma = new PrismaClient();
 
@@ -9,11 +10,11 @@ export default async function handler(req, res) {
     const users = await prisma.user.findMany();
 
     // Example of raw Oracle query using oracledb
-    const connection = await oracledb.getConnection({
-      user: 'user',
-      password: 'password',
-      connectionString: 'localhost:1521/xe'
-    });
+    // const connection = await oracledb.getConnection({
+    //   user: 'user',
+    //   password: 'password',
+    //   connectionString: 'localhost:1521/xe'
+    // });
 
     const result = await connection.execute(
       `SELECT * FROM some_table`
